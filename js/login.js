@@ -3,9 +3,11 @@
 //elementos HTML presentes.
 
 function validateForm(){
-    var name = document.getElementById('name').value;
+    var name = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     if(password != "" && name != ""){
+        localStorage.setItem('username', name);
+        console.log(localStorage.getItem("username"))
         window.location.href = "inicio.html";
     }
     else{
@@ -24,7 +26,7 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    windows.location.href = "inicio.html";
+    window.location.href = "inicio.html";
 }
 
   function signOut() {
@@ -33,3 +35,6 @@ function onSignIn(googleUser) {
       console.log('User signed out.');
     });
   }
+
+
+  

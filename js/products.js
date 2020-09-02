@@ -1,6 +1,6 @@
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_ASC_BY_NAME = "$a";
+const ORDER_DESC_BY_NAME = "$b";
+const ORDER_BY_PROD_COUNT = "Rel.";
 var currentCategoriesArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
@@ -11,14 +11,14 @@ function sortCategories(criteria, array){
     if (criteria === ORDER_ASC_BY_NAME)
     {
         result = array.sort(function(a, b) {
-            if ( a.name < b.name ){ return -1; }
-            if ( a.name > b.name ){ return 1; }
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
     }else if (criteria === ORDER_DESC_BY_NAME){
         result = array.sort(function(a, b) {
-            if ( a.name > b.name ){ return -1; }
-            if ( a.name < b.name ){ return 1; }
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
             return 0;
         });
     }else if (criteria === ORDER_BY_PROD_COUNT){
@@ -134,3 +134,17 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+// Buscador
+
+const searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("keyup", (e) =>{
+  const searchString = e.target.value;
+
+  showCategoriesList().filter(category =>{
+    return category.name.includes(searchString);
+  });
+});
+
+
+
