@@ -74,8 +74,19 @@
         <dt> <h2>Dejanos tus comentarios:</h2></dt>
         <dd>
           <div id="">
-            <form action="">
-              <textarea class="form-control" rows="5" placeholder="Cuerpo del comentario..." ></textarea>
+            <form action="" id="form_add_comment">
+              <textarea class="form-control" id="commentText" rows="5" placeholder="Cuerpo del comentario..." required ></textarea>
+              <br>
+              <p>Califica nuestro producto:
+                <select id="score">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </p>
+              <input type="submit" id="submit" value="Comentar">
             </form>
           </div>
         </dd>

@@ -96,12 +96,39 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             commentsArray = resultObj.data;
 
-
-            // document.getElementById("comments").innerHTML = `<strong>` + commentsArray[0].user + `</strong>` + ` ` + commentsArray[0].dateTime + `<br>` + commentsArray[0].description
             showComments(commentsArray);
-
+            
         }
     });
+
+    let commentText = document.getElementById("commentText");
+    let score = document.getElementById("score");
+    let scoreValue;
+
+    score.onchange = (e) => {
+        scoreValue = e.target.value;
+        console.log(e.target.value);
+    }
+
+    document.getElementById("form_add_comment").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        var date = new Date();
+
+        const fakeComment = {
+            dateTime: date,
+            description: commentText.value,
+            score: scoreValue,
+            user: localStorage.getItem("username"),
+        }
+        commentsArray.push(fakeComment);
+        showComments(commentsArray)
+
+    });
+
+
 });
+
+
 
 
