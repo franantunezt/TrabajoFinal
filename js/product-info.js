@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         var date = new Date();
 
         const fakeComment = {
-            dateTime: date,
+            dateTime: date.toISOString().split("T")[0] + ` `+ date.toLocaleTimeString(),
             description: commentText.value,
             score: scoreValue,
             user: localStorage.getItem("username"),
