@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(e){
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="d-block mb-4 h-100">
                                     <h4>`+ productsInfo[relatedProducts[i]].name +`</h4>
-                                    <img class="img-fluid img-thumbnail" src="` + productsInfo[relatedProducts[i]].imgSrc + `" alt="">
+                                    <a href="product-info.html"><img class="img-fluid img-thumbnail" src="` + productsInfo[relatedProducts[i]].imgSrc + `" alt=""></a>
                                 </div>
                             </div>
                             `
