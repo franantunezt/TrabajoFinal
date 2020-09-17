@@ -5,9 +5,10 @@
 function validateForm(){
     var name = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+
     if(password != "" && name != ""){
         localStorage.setItem('username', name);
-        console.log(localStorage.getItem("username"))
+        // console.log(localStorage.getItem("username"))
         window.location.href = "inicio.html";
     }
     else{
@@ -16,8 +17,10 @@ function validateForm(){
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
-
+  
 })
+
+
 
 
 function onSignIn(googleUser) {
