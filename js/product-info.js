@@ -7,21 +7,38 @@
 
 function showImagesGallery(array){
 
-    let htmlContentToAppend = "";
-
-    for(let i = 0; i < array.length; i++){
-        let imageSrc = array[i];
-
-        htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
-            </div>
+    htmlContentToAppend = `
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img src="` + array[0] +`" class="d-block w-100" alt="...">
         </div>
-        `
+        <div class="carousel-item">
+        <img src="` + array[1] +`" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="` + array[2] +`" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="` + array[3] +`" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+        <img src="` + array[4] +`" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    </div>
+    `
 
-        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
-    }
+    document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+    
 }
 
 
