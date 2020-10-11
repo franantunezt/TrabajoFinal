@@ -66,8 +66,7 @@
           <th scope="col">Imágen</th>
           <th scope="col">Nombre</th>
           <th scope="col"> Cantidad</th>
-          <th scope="col">Costo</th>
-          <th scope="col">Subtotal</th>
+          <th scope="col">Costo Unitario</th>
         </tr>
       </thead>
       <tbody id="items">
@@ -78,25 +77,26 @@
       
       <h5 class="card-header">Compras totales</h5>
       <div class="card-body">
-        <div class="card-title" id="subtotal">
+        <div class="card-title"><b>Subtotal:</b> <span id="subtotal"></span>
         </div>
-        <h6 class="card-title">Shipping:</h6>
+        <h6 class="card-title"> <b>Envío:</b></h6>
           <div id="shipping">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="standard">
+              <input class="form-check-input" type="radio" name="shipping" value="standard" id="standard" >
               <label class="form-check-label" > Standard
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="premium">
+              <input class="form-check-input" type="radio" name="shipping" value="premium" id="premium">
               <label class="form-check-label" > Premium
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="express">
+              <input class="form-check-input" type="radio" name="shipping" value="express" id="express">
               <label class="form-check-label" > Express
             </div>
+            <button onclick="check()" type="button">Ok</button>
           </div>
           <br>
-        <h4 class="card-title">Total: $</h4>
+        <h4 class="card-title">Total: $ <span id="total"></span></h4>
       </div>
 
     </div>
