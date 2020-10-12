@@ -14,7 +14,7 @@ function showArticle(array){
         <tr>
             <td><img src="`+ article.src +`" width="100px"></img> </td>
             <td>`+ article.name +` </td>
-            <td><input type="number" min="1" max="100" value="`+ article.count +`" class="quantity" id="quantity"> </td>
+            <td><input type="number" min="1" max="100" value="`+ article.count +`" class="quantity form-control w-50" id="quantity"> </td>
             <td>`+article.currency + ` `+ article.unitCost +` </td>
         </tr>
         `
@@ -71,6 +71,7 @@ function check(){
     document.getElementById("total").innerHTML = totalToAppend;
 }
 
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CART_INFO_URL).then(function(resultObj){
         cartInfo = resultObj.data
@@ -78,6 +79,3 @@ document.addEventListener("DOMContentLoaded", function(e){
         showArticle(article);
     })
 });
-
-
-console.log(subtotal)

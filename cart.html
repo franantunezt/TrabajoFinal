@@ -60,7 +60,7 @@
 
   <div class="container p-5">
     <h4>Carrito de compras</h4>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Imágen</th>
@@ -80,9 +80,9 @@
         <div class="card-title"><b>Subtotal:</b> <span id="subtotal"></span>
         </div>
         <h6 class="card-title"> <b>Envío:</b></h6>
-          <div id="shipping">
+          <form id="shipping">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="standard" id="standard" >
+              <input class="form-check-input" type="radio" name="shipping" value="standard" id="standard" onclick="checkStandard()">
               <label class="form-check-label" > Standard
             </div>
             <div class="form-check">
@@ -93,8 +93,12 @@
               <input class="form-check-input" type="radio" name="shipping" value="express" id="express">
               <label class="form-check-label" > Express
             </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Dirección de envío:</label>
+              <input type="" class="form-control" placeholder="ingrese dirección de envío">
+            </div>
             <button onclick="check()" type="button">Ok</button>
-          </div>
+          </form>
           <br>
         <h4 class="card-title">Total: $ <span id="total"></span></h4>
       </div>
