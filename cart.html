@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+  <link rel="icon" type="image/png" href="/img/favicon.png"/>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,6 +33,7 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
   <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </head>
 
@@ -82,26 +84,146 @@
         <h6 class="card-title"> <b>Envío:</b></h6>
           <form id="shipping">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="standard" id="standard" onclick="checkStandard()">
-              <label class="form-check-label" > Standard
+              <input class="form-check-input" type="radio" name="shipping" value="standard" id="standard" onclick="check()">
+              <label class="form-check-label" for="standard"> Standard (12 a 15 días)
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="premium" id="premium">
-              <label class="form-check-label" > Premium
+              <input class="form-check-input" type="radio" name="shipping" value="premium" id="premium" onclick="check()">
+              <label class="form-check-label" for="premium"> Premium (2-5 días)
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="express" id="express">
-              <label class="form-check-label" > Express
+              <input class="form-check-input" type="radio" name="shipping" value="express" id="express" onclick="check()">
+              <label class="form-check-label" for="express"> Express (5-8 días)
             </div>
+            <br>
             <div class="form-group">
-              <label for="exampleInputPassword1">Dirección de envío:</label>
+              <label for="exampleInputPassword1" required>Dirección de envío:</label>
               <input type="" class="form-control" placeholder="ingrese dirección de envío">
             </div>
-            <button onclick="check()" type="button">Ok</button>
           </form>
           <br>
         <h4 class="card-title">Total: $ <span id="total"></span></h4>
+        <hr>
+        <br>
+        <button class="btn btn-dark" data-toggle="modal" data-target="#payment">Métodos de pago</button>
+
+        <!-- Ventana emergente -->
+        <div class="modal fade" tabindex="-1" id="payment">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Métodos de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="credito-tab" data-toggle="tab" href="#credito" role="tab" aria-controls="home" aria-selected="true"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
+                      <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z"/>
+                    </svg>  Tarjeta de Crédito/Débito</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="banco-tab" data-toggle="tab" href="#banco" role="tab" aria-controls="profile" aria-selected="false"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
+                      <path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z"/>
+                      <path d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                    </svg>  Transferencia bancaria</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="credito" role="tabpanel" aria-labelledby="home-tab">
+                    <!-- TARJETAS -->
+                    <form id="creditForm" method="GET" action="/"> 
+                      <div class="row">
+                        <div class="col-md-6 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="cc-name" class="form-control">
+                            <label for="cc-name">Titular</label>
+                            <small class="text-muted">Nombre completo</small>
+                          </div>
+                          <div class="invalid-feedback">
+                            Name on card is required
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="cc-number" class="form-control" >
+                            <label for="cc-number">Número de tarjeta</label>
+                          </div>
+                          <div class="invalid-feedback">
+                            Requerido
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="cc-expiration" class="form-control" >
+                            <label for="cc-expiration">Expiración</label>
+                          </div>
+                          <div class="invalid-feedback">
+                            Fecha requerida
+                          </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="cc-cvv" class="form-control" >
+                            <label for="cc-cvv">CVV</label>
+                          </div>
+                          <div class="invalid-feedback">
+                            Código de seguridad requerido
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-secondary">Confirmar</button>
+                    </form>
+
+                  </div>
+                  <!-- BANCO -->
+                  <div class="tab-pane fade" id="banco" role="tabpanel" aria-labelledby="profile-tab">
+                    <form id="bankForm" method="GET" action="/"> 
+                      <div class="row">
+                        <div class="col-md-6 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="bank-name" class="form-control">
+                            <label for="cc-name">Banco</label>
+                          </div>
+                          <div class="invalid-feedback">
+                            Name on card is required
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                          <div class="md-form md-outline my-2">
+                            <input type="text" id="bank-account" class="form-control" >
+                            <label for="cc-number">Número de cuenta</label>
+                          </div>
+                          <div class="invalid-feedback">
+                            Requerido
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-secondary">Confirmar</button>
+                    </form>
+
+                  </div>
+
+                  <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+          
       </div>
+      
+      
 
     </div>
     

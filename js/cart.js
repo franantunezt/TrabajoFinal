@@ -3,7 +3,7 @@
 //elementos HTML presentes.
 
 const CART_PRODUCTS = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
-let subtotal;
+
 
 // MUESTRA LOS PRODUCTOS
 function showArticle(array){
@@ -14,7 +14,7 @@ function showArticle(array){
         <tr>
             <td><img src="`+ article.src +`" width="100px"></img> </td>
             <td>`+ article.name +` </td>
-            <td><input type="number" min="1" max="100" value="`+ article.count +`" class="quantity form-control w-50" id="quantity"> </td>
+            <td><input type="number" min="1" max="100" value="`+ article.count +`" class="quantity form-control w-50" id="`+i+`"> </td>
             <td>`+article.currency + ` `+ article.unitCost +` </td>
         </tr>
         `
@@ -32,9 +32,8 @@ function showArticle(array){
         const element = cantidadProducto[i]
         element.onchange = function(e){
             let cantidadtotalproducto = e.target.value
-            subtotal = article.unitCost*cantidadtotalproducto
-            console.log(cantidadtotalproducto)
-            
+            subtotal = array[this.id].unitCost*cantidadtotalproducto
+            console.log(cantidadtotalproducto)            
             subtotalToAppend =`
             <td id="subtotal"><b>`+ subtotal +`<b></td>
 
@@ -70,6 +69,58 @@ function check(){
 
     document.getElementById("total").innerHTML = totalToAppend;
 }
+
+let ccname = document.getElementById("cc-name")
+let ccnumber = document.getElementById("cc-number")
+let ccexpiration = document.getElementById("cc-expiration")
+let cccvv = document.getElementById("cc-cvv")
+let creditForm = document.getElementById("creditForm");
+
+creditForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    if((ccname.value =="" || ccnumber.value =="" || ccexpiration.value == "" || cccvv.value =="")){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal!'
+        })
+    }else if (ccname.value !=="" && ccnumber.value !=="" && ccexpiration.value !== "" && cccvv.value !==""){
+        Swal.fire({
+            position: 'center-center',
+            icon: 'success',
+            title: 'Transacción completa',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    
+});
+
+
+let bankForm = document.getElementById("bankForm");
+let bankName = document.getElementById("bank-name");
+let bankAccount = document.getElementById("bank-account")
+
+bankForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    if((bankName.value =="" || bankAccount.value =="")){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal!'
+        })
+    }else if (bankName.value !=="" && bankAccount.value !==""){
+        Swal.fire({
+            position: 'center-center',
+            icon: 'success',
+            title: 'Transacción completa',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    
+});
+
 
 
 document.addEventListener("DOMContentLoaded", function(e){
