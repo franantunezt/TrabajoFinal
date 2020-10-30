@@ -44,15 +44,6 @@ function logOut(){
   localStorage.removeItem("username");
 }
 
-if (auth2.isSignedIn.get()) {
-  var profile = auth2.currentUser.get().getBasicProfile();
-  console.log('ID: ' + profile.getId());
-  console.log('Full Name: ' + profile.getName());
-  console.log('Given Name: ' + profile.getGivenName());
-  console.log('Family Name: ' + profile.getFamilyName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
-}
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
