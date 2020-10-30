@@ -41,7 +41,7 @@ var getJSONData = function(url){
 }
 
 function logOut(){
-  localStorage.clear()
+  localStorage.removeItem("username");
 }
 
 
