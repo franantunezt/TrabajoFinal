@@ -51,6 +51,7 @@ function logOut(){
 document.addEventListener("DOMContentLoaded", function(e){
   const botonusuario = document.getElementById("btnuser");
   botonusuario.innerText = localStorage.getItem("username");
+  
 });
 
 

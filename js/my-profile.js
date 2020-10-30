@@ -4,6 +4,10 @@
 document.addEventListener("DOMContentLoaded", function (e) {
     getValue();
     saveProfile();
+    const recentImageDataUrl = localStorage.getItem("recent-image");
+    if(recentImageDataUrl){
+        document.getElementById("imgPreview").setAttribute("src", recentImageDataUrl);
+    }
 });
 
 function saveProfile(){
@@ -29,8 +33,8 @@ function saveProfile(){
             showConfirmButton: false,
             timer: 1500
         })
+
     });
-   
 }
 
 function getValue(){
@@ -49,4 +53,14 @@ function getValue(){
     }
 }
 
+document.getElementById("profileimg").addEventListener("change", function(){
+    console.log(this.files);
+    const reader = new FileReader();
 
+    reader.addEventListener("load", ()=>{
+        localStorage.setItem("recent-image",reader.result);
+        console.log(reader.result);
+    })
+
+    reader.readAsDataURL(this.files[0]);
+})
