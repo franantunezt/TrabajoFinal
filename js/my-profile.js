@@ -4,12 +4,29 @@
 document.addEventListener("DOMContentLoaded", function (e) {
     getValue();
     saveProfile();
-    const recentImageDataUrl = localStorage.getItem("recent-image");
+
+    // Obtengo la imagen al iniciar
+    const recentImageDataUrl = localStorage.getItem("avatar");
     if(recentImageDataUrl){
         document.getElementById("imgPreview").setAttribute("src", recentImageDataUrl);
     }
+
+    // Guardo imagen
+    const avatarInput = document.getElementById("profileImg");
+
+    avatarInput.onchange = (event) => {
+        let avatarFile = event.target.files[0];
+        let fr = new FileReader();
+        fr.onload = function(){
+            console.log(fr.result);
+            document.getElementById("imgPreview").src = fr.result;
+            localStorage.setItem("avatar", fr.result);
+        }
+        fr.readAsDataURL(avatarFile);
+    }
 });
 
+// Funcion que guarda datos ingresados a localstorage
 function saveProfile(){
     document.getElementById("btn").addEventListener("click", function(event){
         event.preventDefault();
@@ -18,14 +35,13 @@ function saveProfile(){
             lastname: document.getElementById("lastname").value,
             age: document.getElementById("age").value,
             email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value
+            phone: document.getElementById("phone").value,
         }
         let profile_serialized = JSON.stringify(profile);
         localStorage.setItem("profile",profile_serialized);
         // console.log(localStorage);
-
-        let profile_deserialized = JSON.parse(localStorage.getItem("profile"));
         // console.log(profile_serialized);
+
         Swal.fire({
             position: 'center-center',
             icon: 'success',
@@ -37,6 +53,7 @@ function saveProfile(){
     });
 }
 
+// funcion que me trae los datos del locastorage
 function getValue(){
     let storedProfile = localStorage.getItem("profile");
     // console.log(storedProfile)
@@ -53,14 +70,21 @@ function getValue(){
     }
 }
 
-document.getElementById("profileimg").addEventListener("change", function(){
-    console.log(this.files);
-    const reader = new FileReader();
 
-    reader.addEventListener("load", ()=>{
-        localStorage.setItem("recent-image",reader.result);
-        console.log(reader.result);
-    })
 
-    reader.readAsDataURL(this.files[0]);
-})
+// BACK UP
+// const recentImageDataUrl = localStorage.getItem("recent-image");
+//     if(recentImageDataUrl){
+//         document.getElementById("imgPreview").setAttribute("src", recentImageDataUrl);
+//     }
+// document.getElementById("profileimg").addEventListener("change", function(){
+//     console.log(this.files);
+//     const reader = new FileReader();
+
+//     reader.addEventListener("load", ()=>{
+//         localStorage.setItem("profile",reader.result);
+//         console.log(reader.result);
+//     })
+
+//     reader.readAsDataURL(this.files[0]);
+// })
